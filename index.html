@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japode | O Portal do Jogo Retro</title>
+    <!-- Carregamento do Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuração de fonte global para Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Tema de Cor: Tomato (FF6347) e um contraste escuro */
+        :root {
+            --color-tomato-primary: #FF6347;
+            --color-tomato-dark: #C63D2E;
+        }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .bg-tomato { background-color: var(--color-tomato-primary); }
+        .text-tomato { color: var(--color-tomato-primary); }
+        .hover-bg-tomato-dark:hover { background-color: var(--color-tomato-dark); }
+
+        /* Efeito de hover em cards */
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 99, 71, 0.4); /* Sombra com cor Tomato */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-inter">
+
+    <!-- Cabeçalho e Navegação -->
+    <header class="bg-white shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- Logo Japode (Círculo Amarelo com 'J') -->
+            <div class="flex items-center space-x-3">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="#FACC15"/> <!-- Amarelo 500 -->
+                    <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="Inter" font-size="30" font-weight="900" fill="white">J</text>
+                </svg>
+                <a href="#" class="text-3xl font-black text-tomato">JAPODE</a>
+            </div>
+
+            <!-- Navegação (Desktop) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-gray-600 hover:text-tomato transition duration-150 font-medium">Início</a>
+                <a href="#destaques" class="text-gray-600 hover:text-tomato transition duration-150 font-medium">Jogos</a>
+                <a href="#classicos" class="text-gray-600 hover:text-tomato transition duration-150 font-medium">Consoles</a>
+                <a href="#noticias" class="text-gray-600 hover:text-tomato transition duration-150 font-medium">Comunidade</a>
+            </nav>
+
+            <!-- Botão de Menu (Mobile) -->
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-tomato rounded-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Menu Mobile (oculto por padrão) -->
+        <div id="mobile-menu" class="hidden md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Início</a>
+            <a href="#destaques" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Jogos</a>
+            <a href="#classicos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Consoles</a>
+            <a href="#noticias" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Comunidade</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+
+        <!-- Seção Hero (Banner Principal - Carrossel de Imagens Retro) -->
+        <section id="inicio" class="relative rounded-lg m-4 shadow-xl overflow-hidden h-[400px] md:h-[550px]">
+            
+            <!-- Carrossel Container (200% de largura para 2 slides) -->
+            <div id="hero-carousel" class="flex w-[200%] h-full transition-transform duration-700 ease-in-out">
+                
+                <!-- Slide 1: Game Boy/Pokémon - Imagem 1 do carrossel -->
+                <div class="w-1/2 h-full flex items-center justify-center bg-cover bg-center" style="background-image: url('https://placehold.co/1200x600/059669/FFFFFF?text=Pokemon+Game+Boy+Classic');">
+                </div>
+
+                <!-- Slide 2: SNES/Zelda - Imagem 2 do carrossel -->
+                <div class="w-1/2 h-full flex items-center justify-center bg-cover bg-center" style="background-image: url('https://placehold.co/1200x600/F97316/FFFFFF?text=Zelda+A+Link+to+the+Past+SNES');">
+                </div>
+            </div>
+
+            <!-- Conteúdo de Overlay Fixo (Texto e CTA) REMOVIDO -->
+
+            <!-- Navegação do Carrossel (Pontos) -->
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                <button onclick="currentSlide(0)" class="w-3 h-3 rounded-full bg-white opacity-75 hover:opacity-100 transition duration-300 pointer-events-auto" id="dot-0" aria-label="Slide 1"></button>
+                <button onclick="currentSlide(1)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition duration-300 pointer-events-auto" id="dot-1" aria-label="Slide 2"></button>
+            </div>
+        </section>
+
+        <!-- Seção de Destaques (Grid de Jogos Clássicos) -->
+        <section id="destaques" class="py-16 px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-800 mb-10 text-center">🔥 Jogos Quentes do Retro 🕹️</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Super Mario 64 (N64) -->
+                <div class="bg-white rounded-xl shadow-lg game-card overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/94A3B8/FFFFFF?text=MARIO+64" alt="Super Mario 64" onerror="this.onerror=null;this.src='https://placehold.co/600x400/94A3B8/FFFFFF?text=MARIO+64';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Super Mario 64</h3>
+                        <p class="text-gray-600 mb-4">A revolução 3D que definiu uma geração de jogos de plataforma.</p>
+                        <span class="inline-block bg-tomato text-white text-xs px-3 py-1 rounded-full font-bold">N64</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Sonic the Hedgehog 2 (Mega Drive) -->
+                <div class="bg-white rounded-xl shadow-lg game-card overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/3B82F6/FFFFFF?text=SONIC+2" alt="Sonic the Hedgehog 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3B82F6/FFFFFF?text=SONIC+2';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Sonic the Hedgehog 2</h3>
+                        <p class="text-gray-600 mb-4">O ouriço mais rápido do mundo em sua melhor aventura 16-bits com o Tails.</p>
+                        <span class="inline-block bg-blue-700 text-white text-xs px-3 py-1 rounded-full font-bold">Mega Drive</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Final Fantasy VII (PlayStation) -->
+                <div class="bg-white rounded-xl shadow-lg game-card overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="https://placehold.co/600x400/4F46E5/FFFFFF?text=FFVII" alt="Final Fantasy VII" onerror="this.onerror=null;this.src='https://placehold.co/600x400/4F46E5/FFFFFF?text=FFVII';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Final Fantasy VII</h3>
+                        <p class="text-gray-600 mb-4">O JRPG que levou os gráficos 3D e narrativas cinematográficas para o topo.</p>
+                        <span class="inline-block bg-purple-700 text-white text-xs px-3 py-1 rounded-full font-bold">PS1</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Seção Clássicos (Consoles Retrô - Fundo Escuro para Contraste) -->
+        <section id="classicos" class="bg-gray-800 py-16 px-4 sm:px-6 lg:px-8 rounded-xl m-4">
+            <h2 class="text-4xl font-bold text-white mb-10 text-center">👾 Nossas Máquinas do Tempo 🕰️</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <!-- Clássico 1: Atari 2600 -->
+                <div class="text-center bg-white p-6 rounded-xl shadow-md game-card border-b-4 border-tomato">
+                    <img class="mx-auto w-24 h-24 mb-4" src="https://placehold.co/100x100/A0AEC0/FFFFFF?text=ATARI" alt="Console Atari 2600" onerror="this.onerror=null;this.src='https://placehold.co/100x100/A0AEC0/FFFFFF?text=ATARI';">
+                    <h3 class="text-xl font-bold text-gray-800">Atari 2600</h3>
+                    <p class="text-gray-600 text-sm">O pioneiro dos jogos caseiros e a origem de tudo.</p>
+                </div>
+
+                <!-- Clássico 2: Mega Drive / Genesis -->
+                <div class="text-center bg-white p-6 rounded-xl shadow-md game-card border-b-4 border-tomato">
+                    <img class="mx-auto w-24 h-24 mb-4" src="https://placehold.co/100x100/4B5563/FFFFFF?text=MEGA" alt="Console Mega Drive" onerror="this.onerror=null;this.src='https://placehold.co/100x100/4B5563/FFFFFF?text=MEGA';">
+                    <h3 class="text-xl font-bold text-gray-800">Mega Drive</h3>
+                    <p class="text-gray-600 text-sm">Blast processing e o rival azul que marcou os anos 90.</p>
+                </div>
+
+                <!-- Clássico 3: Super Nintendo -->
+                <div class="text-center bg-white p-6 rounded-xl shadow-md game-card border-b-4 border-tomato">
+                    <img class="mx-auto w-24 h-24 mb-4" src="https://placehold.co/100x100/F97316/FFFFFF?text=SNES" alt="Console Super Nintendo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F97316/FFFFFF?text=SNES';">
+                    <h3 class="text-xl font-bold text-gray-800">Super Nintendo</h3>
+                    <p class="text-gray-600 text-sm">Os gráficos 16-bits mais coloridos e RPGs de peso.</p>
+                </div>
+
+                <!-- Clássico 4: PlayStation 1 -->
+                <div class="text-center bg-white p-6 rounded-xl shadow-md game-card border-b-4 border-tomato">
+                    <img class="mx-auto w-24 h-24 mb-4" src="https://placehold.co/100x100/059669/FFFFFF?text=PS1" alt="Console PlayStation 1" onerror="this.onerror=null;this.src='https://placehold.co/100x100/059669/FFFFFF?text=PS1';">
+                    <h3 class="text-xl font-bold text-gray-800">PlayStation 1</h3>
+                    <p class="text-gray-600 text-sm">CD-ROMs, jogos 3D e a entrada na nova era.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Notícias (Comunidade / Newsletter) -->
+        <section id="noticias" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-200 p-8 md:p-12 rounded-2xl text-center shadow-inner border-l-4 border-tomato">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Mergulhe na Nostalgia!</h2>
+                <p class="text-gray-700 mb-6 max-w-lg mx-auto">Cadastre-se para receber análises retro, curiosidades sobre desenvolvimento e as últimas novidades do mundo da emulação e colecionismo.</p>
+                
+                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Seu melhor e-mail..." class="flex-grow p-3 rounded-xl border-2 border-gray-300 focus:outline-none focus:border-tomato" required>
+                    <button type="submit" class="bg-tomato hover-bg-tomato-dark text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300">
+                        Assinar Já
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 text-white py-10 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <!-- Logo no Rodapé -->
+            <div class="flex justify-center items-center space-x-3 mb-4">
+                <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="#FACC15"/>
+                    <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="Inter" font-size="25" font-weight="900" fill="white">J</text>
+                </svg>
+                <span class="text-xl font-black text-tomato">JAPODE</span>
+            </div>
+
+            <p class="text-gray-400 text-sm">© 2024 Japode. Seu portal retro, dedicado à história dos games. </p>
+            <p class="text-gray-500 text-xs mt-2">Os consoles e jogos são marcas registradas de seus respectivos proprietários.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para o menu mobile e carrossel -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica do Menu Mobile ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Lógica do Carrossel Hero ---
+            const carousel = document.getElementById('hero-carousel');
+            const totalSlides = 2;
+            let slideIndex = 0;
+            let slideInterval;
+
+            function updateDots() {
+                // Atualiza a opacidade dos pontos de navegação
+                document.querySelectorAll('[id^="dot-"]').forEach((dot, index) => {
+                    if (index === slideIndex) {
+                        dot.classList.remove('opacity-50');
+                        dot.classList.add('opacity-75');
+                    } else {
+                        dot.classList.add('opacity-50');
+                        dot.classList.remove('opacity-75');
+                    }
+                });
+            }
+
+            function showSlide(index) {
+                // Lógica de loop infinito
+                if (index >= totalSlides) {
+                    index = 0;
+                } else if (index < 0) {
+                    index = totalSlides - 1;
+                }
+                slideIndex = index;
+                // Move o carrossel. Como a largura é 200%, cada slide ocupa 50%
+                const offset = -index * 50; 
+                carousel.style.transform = `translateX(${offset}%)`;
+                updateDots();
+            }
+
+            // Função pública para navegação pelos botões de ponto
+            window.currentSlide = function(index) {
+                clearInterval(slideInterval);
+                showSlide(index);
+                startAutoSlide(); // Reinicia a contagem automática
+            }
+            
+            // Inicia o auto-slide
+            function startAutoSlide() {
+                slideInterval = setInterval(() => {
+                    showSlide(slideIndex + 1);
+                }, 5000); // Troca a cada 5 segundos
+            }
+
+            // Inicialização
+            showSlide(0); 
+            startAutoSlide();
+        });
+    </script>
+</body>
+</html>
